@@ -7,27 +7,27 @@
         background-color: rgba(240, 240, 240, 0.8); /* Fundo claro com transparência */
         font-family: Arial, sans-serif;
         margin: 20px;
-        color: #333; /* Texto mais suave */
-        text-align: center; /* Centralizado */
+        color: #333;
+        text-align: center;
     }
 
     .product-details {
-        background-color: rgba(255, 255, 255, 0.8); /* Fundo translúcido */
+        background-color: rgba(255, 255, 255, 0.8);
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         max-width: 800px;
         margin: auto;
-        transition: transform 0.3s ease-in-out; /* Adicionado efeito de transição */
+        transition: transform 0.3s ease-in-out;
     }
 
     .product-details:hover {
-        transform: scale(1.02); /* Efeito ao passar o mouse */
+        transform: scale(1.02);
     }
 
     h2 {
         text-align: center;
-        color: #333; /* Texto mais suave */
+        color: #333;
     }
 
     .product-info {
@@ -41,7 +41,7 @@
     }
 
     .back-link a {
-        background-color: rgba(0, 123, 255, 0.8); /* Botão azul translúcido */
+        background-color: rgba(0, 123, 255, 0.8);
         color: white;
         padding: 10px 20px;
         text-decoration: none;
@@ -50,11 +50,11 @@
     }
 
     .back-link a:hover {
-        background-color: rgba(0, 86, 179, 0.8); /* Azul mais escuro */
+        background-color: rgba(0, 86, 179, 0.8);
     }
 
     .buy-button {
-        background-color: rgba(76, 175, 80, 0.8); /* Verde translúcido */
+        background-color: rgba(76, 175, 80, 0.8);
         color: white;
         padding: 10px 20px;
         border: none;
@@ -67,8 +67,8 @@
     }
 
     .buy-button:hover {
-        background-color: rgba(69, 160, 73, 0.8); /* Verde um pouco mais escuro */
-        transform: scale(1.05); /* Leve zoom */
+        background-color: rgba(69, 160, 73, 0.8);
+        transform: scale(1.05);
     }
 
     .product-images {
@@ -153,9 +153,13 @@
         echo "</div>
                 <div class='product-info'>
                     <h3>" . $row["nome"] . "</h3>
-                    <p>Valor: R$" . $row["valor"] . "</p>
-                    <p>Quantidade Disponível: " . $row["quantidade"] . "</p>
-                    <a href='" . $row["url_buy"] . "' class='buy-button'>Locar</a>
+                    <p>Valor: R$" . number_format($row["valor"], 2, ',', '.') . "</p>
+                    <p>Quantidade Disponível: " . htmlspecialchars($row["quantidade"]) . "</p>";
+
+        // Adicionar mensagem automática ao link do WhatsApp
+        $whatsapp_link = $row["url_buy"] . "&text=Olá, estou interessado no produto ID " . $product_id . ". Poderia me fornecer mais informações?";
+
+        echo "<a href='" . htmlspecialchars($whatsapp_link) . "' class='buy-button'>📲 Contato via WhatsApp</a>
                 </div>
               </div>";
     } else {
