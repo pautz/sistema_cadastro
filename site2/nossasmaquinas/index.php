@@ -48,42 +48,58 @@ $conn->close();
 <head>
     <title>Produtos</title>
    <style>
-    /* Estilos mantidos */
     body {
-        background-color: rgba(240, 240, 240, 0.8);
+        background-color: rgba(240, 240, 240, 0.8); /* Fundo claro com transparência */
         font-family: Arial, sans-serif;
-        color: #333;
+        color: #333; /* Texto mais suave */
         text-align: center;
     }
 
     .form-container {
         display: flex;
         flex-wrap: nowrap;
-        gap: 20px;
-        align-items: flex-end;
+        gap: 20px; /* Espaçamento uniforme entre os elementos */
+        align-items: flex-end; /* Mantém alinhamento correto como botão */
         justify-content: center;
         margin-bottom: 20px;
         padding: 20px;
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: rgba(0, 0, 0, 0.1); /* Fundo translúcido */
         border-radius: 8px;
     }
 
+    .form-group {
+        flex: 1;
+        min-width: 200px;
+    }
+
+    .destacado {
+        border: 3px solid rgba(255, 200, 0, 0.8); /* Contorno amarelo suave */
+        background-color: rgba(255, 255, 200, 0.8); /* Fundo translúcido */
+    }
+
     .search-btn {
-        padding: 8px 16px;
+        padding: 8px 16px; /* Ajusta o tamanho para ficar mais proporcional */
         font-size: 16px;
-        background-color: rgba(100, 200, 100, 0.8);
+        background-color: rgba(100, 200, 100, 0.8); /* Verde claro translúcido */
         color: white;
         border: none;
         border-radius: 8px;
         cursor: pointer;
         transition: all 0.3s ease;
-        height: 40px;
-        margin-left: 15px;
+        height: 40px; /* Define uma altura fixa para que fique alinhado */
+        margin-left: 15px; /* Espaçamento correto entre os elementos */
     }
 
     .search-btn:hover {
-        background-color: rgba(80, 180, 80, 0.8);
+        background-color: rgba(80, 180, 80, 0.8); /* Verde um pouco mais escuro */
         transform: scale(1.05);
+    }
+
+    input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid rgba(204, 204, 204, 0.8);
+        border-radius: 5px;
     }
 
     .product-container {
@@ -94,7 +110,7 @@ $conn->close();
     }
 
     .product-card {
-        width: calc(33.33% - 20px);
+        width: calc(33.33% - 20px); /* Mantém três colunas */
         max-width: 300px;
         border-radius: 10px;
         background: linear-gradient(135deg, rgba(200, 200, 255, 0.7), rgba(220, 220, 255, 0.7));
@@ -103,10 +119,59 @@ $conn->close();
         transition: all 0.3s ease-in-out;
     }
 
+    @media (max-width: 900px) {
+        .product-card {
+            width: calc(50% - 20px); /* Ajusta para duas colunas */
+        }
+    }
+
+    @media (max-width: 600px) {
+        .product-card {
+            width: 100%; /* Ajusta para uma coluna */
+        }
+    }
+
+    .product-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 0px 15px rgba(150, 150, 255, 0.5); /* Efeito suave */
+    }
+
     .product-img {
         max-width: 100%;
         height: auto;
         border-radius: 8px;
+    }
+
+    .word-cloud {
+        text-align: center;
+        max-width: 100%;
+        margin-top: 10px;
+    }
+
+    .word-cloud span {
+        display: inline-block;
+        margin: 3px;
+        color: rgba(255, 215, 0, 0.8); /* Dourado translúcido */
+        font-weight: bold;
+    }
+
+    .pagination {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .pagination a {
+        display: inline-block;
+        padding: 8px 15px;
+        margin: 5px;
+        background-color: rgba(255, 152, 0, 0.8); /* Laranja claro translúcido */
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+    .pagination a:hover {
+        background-color: rgba(230, 126, 34, 0.8); /* Laranja um pouco mais escuro */
     }
 
     .btn {
@@ -120,11 +185,28 @@ $conn->close();
         display: inline-block;
         cursor: pointer;
         transition: all 0.3s ease;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
     }
 
     .btn:hover {
         background-color: rgba(230, 126, 34, 0.8);
         transform: scale(1.05);
+    }
+
+    .btn-inicio {
+        background-color: rgba(76, 175, 80, 0.8);
+    }
+
+    .btn-inicio:hover {
+        background-color: rgba(69, 160, 73, 0.8);
+    }
+
+    .btn-visualizar {
+        background-color: rgba(0, 123, 255, 0.8);
+    }
+
+    .btn-visualizar:hover {
+        background-color: rgba(0, 86, 179, 0.8);
     }
 </style>
 </head>
