@@ -15,6 +15,7 @@ if ($conn->connect_error) {
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cadastro de Trator</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
@@ -23,7 +24,16 @@ if ($conn->connect_error) {
         input, select { width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 5px; }
         .checkbox-group { display: flex; flex-wrap: wrap; gap: 10px; }
         .checkbox-group label { display: flex; align-items: center; }
-        input[type="submit"] { width: 100%; padding: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; font-size: 16px; }
+        input[type="submit"] { width: 100%; padding: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; }
+
+        /* Responsividade */
+        @media screen and (max-width: 600px) {
+            body { margin: 10px; }
+            form { width: 90%; padding: 15px; }
+            label, input, select { font-size: 14px; }
+            input[type="submit"] { font-size: 14px; padding: 8px; }
+            .checkbox-group { flex-direction: column; }
+        }
     </style>
 </head>
 <body>
@@ -83,7 +93,7 @@ if ($conn->connect_error) {
             mkdir($target_dir, 0777, true);
         }
 
-        // Inserir no banco de dados (Sem eq_user)
+        // Inserção no banco de dados
         $stmt = $conn->prepare("INSERT INTO cadastro_produto (nome, valor, quantidade, cidadeTrator, estadoTrator, nuvem, url_buy) VALUES (?, ?, ?, ?, ?, ?, ?)");
         if ($stmt) {
             $stmt->bind_param("sdissss", $nome, $valor, $quantidade, $cidadeTrator, $estadoTrator, $nuvem, $url_buy);
