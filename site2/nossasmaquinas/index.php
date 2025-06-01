@@ -11,15 +11,21 @@ if ($conn->connect_error) {
 }
 
 // Definir a quantidade de produtos por página
-$limite = 9; // Mantém múltiplos de 3 colunas
+$limite = 9; 
 $pagina = isset($_GET['pagina']) ? intval($_GET['pagina']) : 1;
 $offset = ($pagina - 1) * $limite;
 
-// Pesquisa personalizada (Apenas busca por ID)
+// Pesquisa personalizada (ID e Nome)
 $searchQuery = "WHERE 1=1"; 
+
 if (!empty($_GET['search_id'])) {
-    $search_id = $_GET['search_id'];
-    $searchQuery .= " AND p.id='$search_id'";
+    $search_id = intval($_GET['search_id']);
+    $searchQuery .= " AND p.id = '$search_id'";
+}
+
+if (!empty($_GET['search_nome'])) {
+    $search_nome = $conn->real_escape_string($_GET['search_nome']);
+    $searchQuery .= " AND p.nome LIKE '%$search_nome%'";
 }
 
 // Obtenção dos produtos com paginação
@@ -47,7 +53,7 @@ $conn->close();
 <html>
 <head>
     <title>Produtos</title>
-   <style>
+    <style>
     body {
         background-color: rgba(240, 240, 240, 0.8); /* Fundo claro com transparência */
         font-family: Arial, sans-serif;
@@ -212,11 +218,13 @@ $conn->close();
 </head>
 <body>
     <h2>Produtos</h2>
-    <center><a href="../" class="btn">🏠 Início</a></center>
-    <br>
 
-    <!-- Formulário de Pesquisa (Apenas por ID) -->
+    <!-- Formulário de Pesquisa por Nome e ID -->
     <form method="get" action="" class="form-container">
+        <div class="form-group">
+            <label for="search_nome">Pesquisar por Nome:</label>
+            <input type="text" id="search_nome" name="search_nome">
+        </div>
         <div class="form-group">
             <label for="search_id">Pesquisar por ID:</label>
             <input type="number" id="search_id" name="search_id">
