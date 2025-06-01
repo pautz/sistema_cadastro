@@ -111,9 +111,9 @@
 
     // Conecte-se ao banco de dados
     $servername = "localhost";
-    $username = "u839226731_cztuap";
-    $password = "Meu6595869Trator";
-    $dbname = "u839226731_meutrator";
+    $username = "username";
+    $password = "password";
+    $dbname = "dbname";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
 
